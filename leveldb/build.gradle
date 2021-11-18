@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'com.github.dcendents.android-maven'
 
 def gitVersion = { ->
     def stdout = new ByteArrayOutputStream()
@@ -25,78 +24,78 @@ System.out.println "LEVELDB_VERSION: ${LEVELDB_VERSION}"
 group 'com.github.hf'
 version VERSION
 
-install {
-    repositories.mavenInstaller {
-        pom.project {
-            name 'leveldb'
-            description 'LevelDB bindings for Android.'
-            url 'https://github.com/hf/leveldb-android'
-            inceptionYear '2014'
+//install {
+//    repositories.mavenInstaller {
+//        pom.project {
+//            name 'leveldb'
+//            description 'LevelDB bindings for Android.'
+//            url 'https://github.com/hf/leveldb-android'
+//            inceptionYear '2014'
+//
+//            packaging 'aar'
+//            groupId 'com.github.hf'
+//            artifactId 'leveldb'
+//
+//            version VERSION
+//
+//            licenses {
+//                license {
+//                    name 'BSD 3-Clause'
+//                    url 'https://github.com/hf/leveldb-android/blob/master/LICENSE.txt'
+//                    distribution 'repo'
+//                }
+//            }
+//
+//            scm {
+//                connection 'https://github.com/hf/leveldb-android.git'
+//                url 'https://github.com/hf/leveldb-android'
+//            }
+//
+//            developers {
+//                developer {
+//                    name 'Stojan Dimitrovski'
+//                }
+//            }
+//        }
+//    }
+//}
 
-            packaging 'aar'
-            groupId 'com.github.hf'
-            artifactId 'leveldb'
-
-            version VERSION
-
-            licenses {
-                license {
-                    name 'BSD 3-Clause'
-                    url 'https://github.com/hf/leveldb-android/blob/master/LICENSE.txt'
-                    distribution 'repo'
-                }
-            }
-
-            scm {
-                connection 'https://github.com/hf/leveldb-android.git'
-                url 'https://github.com/hf/leveldb-android'
-            }
-
-            developers {
-                developer {
-                    name 'Stojan Dimitrovski'
-                }
-            }
-        }
-    }
-}
-
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key  = System.getenv('BINTRAY_KEY')
-
-    configurations = ['archives']
-
-    pkg {
-        repo = 'android'
-        name = 'leveldb-android'
-        licenses = ['BSD 3-Clause']
-        vcsUrl = 'https://github.com/hf/leveldb-android.git'
-
-        userOrg = user
-
-        websiteUrl = 'https://github.com/hf/leveldb-android'
-        issueTrackerUrl = 'https://github.com/hf/leveldb-android'
-
-        githubRepo = 'hf/leveldb-android'
-        githubReleaseNotesFile = 'README.md'
-
-        version {
-            name = VERSION
-            desc = "LevelDB (${LEVELDB_VERSION}) for Android."
-            released = new Date()
-            vcsTag = MAIN_VERSION
-        }
-    }
-}
+//bintray {
+//    user = System.getenv('BINTRAY_USER')
+//    key  = System.getenv('BINTRAY_KEY')
+//
+//    configurations = ['archives']
+//
+//    pkg {
+//        repo = 'android'
+//        name = 'leveldb-android'
+//        licenses = ['BSD 3-Clause']
+//        vcsUrl = 'https://github.com/hf/leveldb-android.git'
+//
+//        userOrg = user
+//
+//        websiteUrl = 'https://github.com/hf/leveldb-android'
+//        issueTrackerUrl = 'https://github.com/hf/leveldb-android'
+//
+//        githubRepo = 'hf/leveldb-android'
+//        githubReleaseNotesFile = 'README.md'
+//
+//        version {
+//            name = VERSION
+//            desc = "LevelDB (${LEVELDB_VERSION}) for Android."
+//            released = new Date()
+//            vcsTag = MAIN_VERSION
+//        }
+//    }
+//}
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 28
+        minSdkVersion 22
+        targetSdkVersion 30
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testHandleProfiling true

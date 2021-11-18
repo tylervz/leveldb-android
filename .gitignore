@@ -42,6 +42,7 @@ Thumbs.db
 # Intellij IDEA (see https://intellij-support.jetbrains.com/entries/23393067)
 *.iml
 /gradle
+leveldb/.cxx/
 leveldb/.externalNativeBuild/
 .idea/runConfigurations.xml
 /gradlew
