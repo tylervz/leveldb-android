@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.github.dcendents.android-maven'
 
 def gitVersion = { ->
     def stdout = new ByteArrayOutputStream()
@@ -24,41 +23,61 @@ System.out.println "LEVELDB_VERSION: ${LEVELDB_VERSION}"
 group 'com.github.hf'
 version VERSION
 
-//install {
-//    repositories.mavenInstaller {
-//        pom.project {
-//            name 'leveldb'
-//            description 'LevelDB bindings for Android.'
-//            url 'https://github.com/hf/leveldb-android'
-//            inceptionYear '2014'
-//
-//            packaging 'aar'
-//            groupId 'com.github.hf'
-//            artifactId 'leveldb'
-//
-//            version VERSION
-//
-//            licenses {
-//                license {
-//                    name 'BSD 3-Clause'
-//                    url 'https://github.com/hf/leveldb-android/blob/master/LICENSE.txt'
-//                    distribution 'repo'
-//                }
-//            }
-//
-//            scm {
-//                connection 'https://github.com/hf/leveldb-android.git'
-//                url 'https://github.com/hf/leveldb-android'
-//            }
-//
-//            developers {
-//                developer {
-//                    name 'Stojan Dimitrovski'
-//                }
-//            }
-//        }
-//    }
-//}
+// TODO: if we want to publish to a Maven repository, we can follow this guide.
+// https://developer.android.com/studio/build/maven-publish-plugin
+// Because the components are created only during the afterEvaluate phase, you must
+// configure your publications using the afterEvaluate() lifecycle method.
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+
+                // You can then customize attributes of the publication as shown below.
+                groupId = 'com.github.hf'
+                artifactId = 'leveldb'
+                version = VERSION
+
+                pom {
+                    name = 'leveldb'
+                    description = 'LevelDB bindings for Android.'
+                    url = 'https://github.com/hf/leveldb-android'
+                    // Not sure if this key is supported or not
+                    // inceptionYear '2014'
+
+                    licenses {
+                        license {
+                            name = 'BSD 3-Clause'
+                            url = 'https://github.com/hf/leveldb-android/blob/master/LICENSE.txt'
+                            distribution = 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            name = 'Stojan Dimitrovski'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:git://github.com/hf/leveldb-android.git'
+                        developerConnection = 'scm:git:ssh://github.com/hf/leveldb-android.git'
+                        url = 'https://github.com/hf/leveldb-android'
+                    }
+                }
+            }
+            // Creates a Maven publication called “debug”.
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                from components.debug
+
+                groupId = 'com.github.hf'
+                artifactId = 'leveldb-debug'
+                version = VERSION
+            }
+        }
+    }
+}
 
 //bintray {
 //    user = System.getenv('BINTRAY_USER')
